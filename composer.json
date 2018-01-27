@@ -1,8 +1,8 @@
 {
-    "name": "wbraganca/yii2-dynamicform",
+    "name": "newerton/yii2-dynamicform",
     "description": "It is widget to yii2 framework to clone form elements in a nested manner, maintaining accessibility.",
     "keywords": [
-        "wbraganca",
+        "newerton",
         "yii2",
         "extension",
         "widget",
@@ -13,25 +13,25 @@
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/wbraganca/yii2-dynamicform/issues",
-        "wiki": "https://github.com/wbraganca/yii2-dynamicform/wiki/",
-        "source": "https://github.com/wbraganca/yii2-dynamicform"
+        "issues": "https://github.com/newerton/yii2-dynamicform/issues",
+        "wiki": "https://github.com/newerton/yii2-dynamicform/wiki/",
+        "source": "https://github.com/newerton/yii2-dynamicform"
     },
     "authors": [
         {
-            "name": "Wanderson Bragança",
-            "email": "wanderson.wbc@gmail.com",
-            "homepage": "http://wbraganca.com"
+            "name": "Newerton Vargas de Araujo",
+            "email": "newerton.araujo@gmail.com",
+            "homepage": "http://newerton.com"
         }
     ],
     "require": {
-        "yiisoft/yii2": "~2.0.5",
+        "yiisoft/yii2": "~2.0.13",
         "symfony/css-selector": "~2.8|~3.0",
         "symfony/dom-crawler": "~2.8|~3.0"
     },
     "autoload": {
         "psr-4": {
-            "wbraganca\\dynamicform\\": "src"
+            "newerton\\dynamicform\\": "src"
         }
     }
 }
