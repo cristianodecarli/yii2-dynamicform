@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://github.com/newerton/yii2-dynamicform
- * @copyright Copyright (c) 2018 Newerton Vargas de Araujo
+ * @copyright Copyright (c) 2014 Wanderson Bragança
  * @license   https://github.com/newerton/yii2-dynamicform/blob/master/LICENSE
  */
 
@@ -10,7 +10,7 @@ namespace newerton\dynamicform;
 /**
  * Asset bundle for dynamicform Widget
  *
- * @author Newerton Vargas de Araujo <newerton.araujo@gmail.com>
+ * @author Wanderson Bragança <wanderson.wbc@gmail.com>
  */
 class DynamicFormAsset extends \yii\web\AssetBundle
 {

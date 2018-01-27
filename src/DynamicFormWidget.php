@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://github.com/newerton/yii2-dynamicform
- * @copyright Copyright (c) 2018 Newerton Vargas de Araujo
+ * @copyright Copyright (c) 2014 Wanderson Bragança
  * @license   https://github.com/newerton/yii2-dynamicform/blob/master/LICENSE
  */
 
@@ -16,7 +16,7 @@ use Symfony\Component\DomCrawler\Crawler;
 /**
  * yii2-dynamicform is widget to yii2 framework to clone form elements in a nested manner, maintaining accessibility.
  *
- * @author Newerton Vargas de Araujo <newerton.araujo@gmail.com>
+ * @author Wanderson Bragança <wanderson.wbc@gmail.com>
  */
 class DynamicFormWidget extends \yii\base\Widget
 {
