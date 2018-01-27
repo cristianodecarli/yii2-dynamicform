@@ -1,11 +1,11 @@
 <?php
 /**
- * @link      https://github.com/wbraganca/yii2-dynamicform
- * @copyright Copyright (c) 2014 Wanderson Bragança
- * @license   https://github.com/wbraganca/yii2-dynamicform/blob/master/LICENSE
+ * @link      https://github.com/newerton/yii2-dynamicform
+ * @copyright Copyright (c) 2018 Newerton Vargas de Araujo
+ * @license   https://github.com/newerton/yii2-dynamicform/blob/master/LICENSE
  */
 
-namespace wbraganca\dynamicform;
+namespace newerton\dynamicform;
 
 use Yii;
 use yii\helpers\Html;
@@ -16,7 +16,7 @@ use Symfony\Component\DomCrawler\Crawler;
 /**
  * yii2-dynamicform is widget to yii2 framework to clone form elements in a nested manner, maintaining accessibility.
  *
- * @author Wanderson Bragança <wanderson.wbc@gmail.com>
+ * @author Newerton Vargas de Araujo <newerton.araujo@gmail.com>
  */
 class DynamicFormWidget extends \yii\base\Widget
 {
@@ -217,7 +217,7 @@ class DynamicFormWidget extends \yii\base\Widget
         $view->registerJs($js, $view::POS_READY);
 
         $js = 'jQuery("#' . $this->formId . '").yiiDynamicForm(' . $this->_hashVar .');' . "\n";
-        $view->registerJs($js, $view::POS_LOAD);
+        $view->registerJs($js, $view::POS_READY);
     }
 
     /**
@@ -253,7 +253,8 @@ class DynamicFormWidget extends \yii\base\Widget
     /**
      * Clear HTML widgetBody. Required to work with zero or more items.
      *
-     * @param string $content
+     * @param $content
+     * @return string
      */
     private function removeItems($content)
     {
