@@ -8,6 +8,7 @@
 namespace newerton\dynamicform;
 
 use Yii;
+use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\base\InvalidConfigException;
@@ -18,14 +19,14 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @author Wanderson Bragança <wanderson.wbc@gmail.com>
  */
-class DynamicFormWidget extends \yii\base\Widget
+class DynamicFormWidget extends Widget
 {
     const WIDGET_NAME = 'dynamicform';
     /**
      * @var string
      */
     public $widgetContainer;
-     /**
+    /**
      * @var string
      */
     public $widgetBody;
@@ -41,7 +42,7 @@ class DynamicFormWidget extends \yii\base\Widget
      * @var string
      */
     public $insertButton;
-     /**
+    /**
      * @var string
      */
     public $deleteButton;
@@ -49,7 +50,7 @@ class DynamicFormWidget extends \yii\base\Widget
      * @var string 'bottom' or 'top';
      */
     public $insertPosition = 'bottom';
-     /**
+    /**
      * @var Model|ActiveRecord the model used for the form
      */
     public $model;
@@ -107,7 +108,7 @@ class DynamicFormWidget extends \yii\base\Widget
         if (empty($this->formId)) {
             throw new InvalidConfigException("The 'formId' property must be set.");
         }
-        if (empty($this->insertPosition) || ! in_array($this->insertPosition, $this->_insertPositions)) {
+        if (empty($this->insertPosition) || !in_array($this->insertPosition, $this->_insertPositions)) {
             throw new InvalidConfigException("Invalid configuration to property 'insertPosition' (allowed values: 'bottom' or 'top')");
         }
         if (empty($this->formFields) || !is_array($this->formFields)) {
@@ -123,18 +124,18 @@ class DynamicFormWidget extends \yii\base\Widget
     protected function initOptions()
     {
         $this->_options['widgetContainer'] = $this->widgetContainer;
-        $this->_options['widgetBody']      = $this->widgetBody;
-        $this->_options['widgetItem']      = $this->widgetItem;
-        $this->_options['limit']           = $this->limit;
-        $this->_options['insertButton']    = $this->insertButton;
-        $this->_options['deleteButton']    = $this->deleteButton;
-        $this->_options['insertPosition']  = $this->insertPosition;
-        $this->_options['formId']          = $this->formId;
-        $this->_options['min']             = $this->min;
-        $this->_options['fields']          = [];
+        $this->_options['widgetBody'] = $this->widgetBody;
+        $this->_options['widgetItem'] = $this->widgetItem;
+        $this->_options['limit'] = $this->limit;
+        $this->_options['insertButton'] = $this->insertButton;
+        $this->_options['deleteButton'] = $this->deleteButton;
+        $this->_options['insertPosition'] = $this->insertPosition;
+        $this->_options['formId'] = $this->formId;
+        $this->_options['min'] = $this->min;
+        $this->_options['fields'] = [];
 
         foreach ($this->formFields as $field) {
-             $this->_options['fields'][] = [
+            $this->_options['fields'][] = [
                 'id' => Html::getInputId($this->model, '[{}]' . $field),
                 'name' => Html::getInputName($this->model, '[{}]' . $field)
             ];
@@ -202,21 +203,21 @@ class DynamicFormWidget extends \yii\base\Widget
         DynamicFormAsset::register($view);
 
         // add a click handler for the clone button
-        $js = 'jQuery("#' . $this->formId . '").on("click", "' . $this->insertButton . '", function(e) {'. "\n";
+        $js = 'jQuery("#' . $this->formId . '").on("click", "' . $this->insertButton . '", function(e) {' . "\n";
         $js .= "    e.preventDefault();\n";
-        $js .= '    jQuery(".' .  $this->widgetContainer . '").triggerHandler("beforeInsert", [jQuery(this)]);' . "\n";
-        $js .= '    jQuery(".' .  $this->widgetContainer . '").yiiDynamicForm("addItem", '. $this->_hashVar . ", e, jQuery(this));\n";
+        $js .= '    jQuery(".' . $this->widgetContainer . '").triggerHandler("beforeInsert", [jQuery(this)]);' . "\n";
+        $js .= '    jQuery(".' . $this->widgetContainer . '").yiiDynamicForm("addItem", ' . $this->_hashVar . ", e, jQuery(this));\n";
         $js .= "});\n";
         $view->registerJs($js, $view::POS_READY);
 
         // add a click handler for the remove button
-        $js = 'jQuery("#' . $this->formId . '").on("click", "' . $this->deleteButton . '", function(e) {'. "\n";
+        $js = 'jQuery("#' . $this->formId . '").on("click", "' . $this->deleteButton . '", function(e) {' . "\n";
         $js .= "    e.preventDefault();\n";
-        $js .= '    jQuery(".' .  $this->widgetContainer . '").yiiDynamicForm("deleteItem", '. $this->_hashVar . ", e, jQuery(this));\n";
+        $js .= '    jQuery(".' . $this->widgetContainer . '").yiiDynamicForm("deleteItem", ' . $this->_hashVar . ", e, jQuery(this));\n";
         $js .= "});\n";
         $view->registerJs($js, $view::POS_READY);
 
-        $js = 'jQuery("#' . $this->formId . '").yiiDynamicForm(' . $this->_hashVar .');' . "\n";
+        $js = 'jQuery("#' . $this->formId . '").yiiDynamicForm(' . $this->_hashVar . ');' . "\n";
         $view->registerJs($js, $view::POS_READY);
     }
 
@@ -226,6 +227,11 @@ class DynamicFormWidget extends \yii\base\Widget
     public function run()
     {
         $content = ob_get_clean();
+        // Check if the content contains HTML entities.
+        if (preg_match('/&[#a-zA-Z0-9]+;/', $content)) {
+            // If the content contains HTML entities, convert them to ensure proper display.
+            $content = mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8');
+        }
         $crawler = new Crawler();
         $crawler->addHTMLContent($content, \Yii::$app->charset);
         $results = $crawler->filter($this->widgetItem);

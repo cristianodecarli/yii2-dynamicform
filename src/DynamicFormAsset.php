@@ -1,18 +1,20 @@
 <?php
 /**
- * @link      https://github.com/newerton/yii2-dynamicform
- * @copyright Copyright (c) 2014 Wanderson Bragança
- * @license   https://github.com/newerton/yii2-dynamicform/blob/master/LICENSE
+ * @link      https://github.com/cristianodecarli/yii2-dynamicform
+ * @copyright Copyright (c) 2024 Cristiano de Carli
+ * @license   https://github.com/cristianodecarli/yii2-dynamicform/blob/master/LICENSE
  */
 
-namespace newerton\dynamicform;
+namespace cristianodecarli\dynamicform;
+
+use yii\web\AssetBundle;
 
 /**
  * Asset bundle for dynamicform Widget
  *
  * @author Wanderson Bragança <wanderson.wbc@gmail.com>
  */
-class DynamicFormAsset extends \yii\web\AssetBundle
+class DynamicFormAsset extends AssetBundle
 {
     /**
      * @inheritdoc
